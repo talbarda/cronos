@@ -45,10 +45,6 @@ class http_client(object):
         return response
 
 
-if __name__ == "__main__":
-    with http_client()  as client:
-        client.send_data({1:"1"})
-
 
 
 
