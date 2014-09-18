@@ -13,11 +13,14 @@ def collect_data():
                 temparture=-5 + (45*random.random()),
                 pressure=300 + (400*random.random()))
 
+def handle_response(response_val):
+    print response_val
+
 if __name__ == "__main__":
 
     with http_client()  as client:
         while True:
-            print client.send_data(data_dict=collect_data())
+            handle_response(client.send_data(data_dict=collect_data()))
             time.sleep(INTERVAL)
 
 
