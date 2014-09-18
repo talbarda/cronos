@@ -46,6 +46,8 @@ def handle_response(response_val):
         change_light(1)
     else:
         change_light(0)
+
+    print response_dict["temperature"]
     print response_val
 
 if __name__ == "__main__":
