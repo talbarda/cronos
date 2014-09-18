@@ -32,9 +32,10 @@ def handle_response(response_val):
 
 if __name__ == "__main__":
 
-    with http_client()  as client:
-        while True:
-            handle_response(client.send_data(data_dict=collect_data()))
-            time.sleep(INTERVAL)
+    while True:
+        with http_client() as client:
+            while client.is_opened:
+                handle_response(client.send_data(data_dict=collect_data()))
+                time.sleep(INTERVAL)
 
 
