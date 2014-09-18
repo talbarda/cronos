@@ -7,6 +7,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
+  , AWS = require('aws-sdk')
   , EmployeeProvider = require('./employeeprovider').EmployeeProvider;
 
 var app = express();
@@ -35,17 +36,45 @@ var employeeProvider= new EmployeeProvider('localhost', 27017);
 
 //index
 app.get('/', function(req, res){
+    console.log("Got message to server");
+    console.log("---------------------");
     console.log(req.body);
+    console.log("---------------------");
+    console.log("pressure: " + req.body.pressure);
+    console.log("temparture: " + req.body.temparture);
+    console.log("uid: " + req.body.uid);
+    console.log("ts: " + req.body.ts);
+    console.log("---------------------");
 
     res.send(req.body);
 
-//  employeeProvider.findAll(function(error, emps){
-//      res.render('index', {
-//            title: 'Employees',
-//            employees:emps
-//        });
-//  });
+//    console.log(req.body);
+//
+//    res.send(req.body);
+
+
 });
+
+    //new employee
+    app.get('/putItem', function(req, res) {
+//        console.log("Got message to server");
+//        console.log("---------------------");
+//        console.log(req.body);
+//        console.log("---------------------");
+//        console.log("pressure: " + req.body.pressure);
+//        console.log("temparture: " + req.body.temparture);
+//        console.log("uid: " + req.body.uid);
+//        console.log("ts: " + req.body.ts);
+//        console.log("---------------------");
+//
+//        res.send(req.body);
+    });
+
+//pressure: 677,
+//    temparture: 18.205564658451276,
+//    uid: '74d515fc-347f-11e4-8b11-984fee013898',
+//    ts: '2014-09-04 22:04:35.356285'
+
 
 //new employee
 app.get('/employee/new', function(req, res) {
