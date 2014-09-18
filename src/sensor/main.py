@@ -1,3 +1,5 @@
+import sys
+
 __author__ = 'talbarda'
 import random
 import uuid
@@ -33,9 +35,12 @@ def handle_response(response_val):
 if __name__ == "__main__":
 
     while True:
-        with http_client() as client:
-            while client.is_opened:
-                handle_response(client.send_data(data_dict=collect_data()))
-                time.sleep(INTERVAL)
+        try:
+            with http_client() as client:
+                while client.is_opened:
+                    handle_response(client.send_data(data_dict=collect_data()))
+                    time.sleep(INTERVAL)
+        except:
+            print sys.exc_info()
 
 
