@@ -7,7 +7,7 @@ import time
 INTERVAL = get_conf().get_conf_value(full_name="sensor.update_seconds_interval", val_type=float, def_val=1)
 
 def collect_data():
-    return dict()
+    return {"message":"demi is gay"}
 
 if __name__ == "__main__":
 

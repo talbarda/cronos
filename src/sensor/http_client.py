@@ -16,6 +16,7 @@ DEF_TIMEOUT = get_conf().get_conf_value(full_name="%s.timeout" % CONF_SECTION, v
 class http_client(object):
     def __init__(self, host=DEF_HOST, method=DEF_METHOD, port=DEF_PORT, timeout=DEF_METHOD):
         self.http_conn = httplib.HTTPConnection(host, port, timeout)
+        self.is_opened = True
         self.request_method = method
         self.headers = {"content-type": 'application/json'}
 
@@ -24,14 +25,16 @@ class http_client(object):
 
     def __exit__(self, type, value, traceback):
         try:
-            self.http_conn.close()
+            if self.is_opened:
+                self.http_conn.close()
+                self.is_opened = False
             print "closed"
         except:
             pass
 
 
     def send_data(self, data_dict, wait_for_response=True, relative_url=""):
-        data_to_send = json.dumps   (data_dict)
+        data_to_send = json.dumps(data_dict)
 
         self.http_conn.request(method=self.request_method,
                                url=relative_url,
