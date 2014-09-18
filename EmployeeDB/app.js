@@ -7,6 +7,7 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
+  , AWS = require('aws-sdk')
   , EmployeeProvider = require('./employeeprovider').EmployeeProvider;
 
 var app = express();
@@ -31,21 +32,52 @@ app.configure('development', function(){
 
 var employeeProvider= new EmployeeProvider('localhost', 27017);
 
+var dynamodb = new AWS.DynamoDB({endpoint: 'https://arn:aws:dynamodb:us-west-2:142231239179:table/messurments'});
+
 //Routes
 
 //index
 app.get('/', function(req, res){
+    console.log("Got message to server");
+    console.log("---------------------");
     console.log(req.body);
+    console.log("---------------------");
+    console.log("pressure: " + req.body.pressure);
+    console.log("temperature: " + req.body.temperature);
+    console.log("uid: " + req.body.uid);
+    console.log("ts: " + req.body.ts);
+    console.log("---------------------");
 
     res.send(req.body);
 
-//  employeeProvider.findAll(function(error, emps){
-//      res.render('index', {
-//            title: 'Employees',
-//            employees:emps
-//        });
-//  });
+//    console.log(req.body);
+//
+//    res.send(req.body);
+
+
 });
+
+    //new employee
+    app.get('/putItem', function(req, res) {
+        dynamodb.batchGetItem(params, function (err, data) {
+            if (err)
+                console.log(err, err.stack); // an error occurred
+            else
+                console.log(data);           // successful response
+        });
+
+//        console.log("Got message to server");
+//        console.log("---------------------");
+//        console.log(req.body);
+//        console.log("---------------------");
+//        console.log("pressure: " + req.body.pressure);
+//        console.log("temparture: " + req.body.temparture);
+//        console.log("uid: " + req.body.uid);
+//        console.log("ts: " + req.body.ts);
+//        console.log("---------------------");
+//
+//        res.send(req.body);
+    });
 
 //new employee
 app.get('/employee/new', function(req, res) {
