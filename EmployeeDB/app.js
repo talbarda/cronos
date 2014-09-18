@@ -35,8 +35,9 @@ var employeeProvider= new EmployeeProvider('localhost', 27017);
 
 //index
 app.get('/', function(req, res){
-    console.log(req);
-    res.send('Barda is Gay!!!');
+    console.log(req.body);
+
+    res.send(req.body);
 
 //  employeeProvider.findAll(function(error, emps){
 //      res.render('index', {
