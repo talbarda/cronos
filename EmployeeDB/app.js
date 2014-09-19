@@ -119,6 +119,7 @@ app.get('/', function(req, res){
         console.log("Setting message to DynamoDB");
 
         res.send(req.body);
+
     });
 
 //new employee
