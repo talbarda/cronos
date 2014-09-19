@@ -81,7 +81,7 @@ app.get('/', function(req, res){
 //    console.log("ts: " + req.body.ts);
 //    console.log("---------------------");
 //
-//    res.send(req.body);
+    res.send(req.body);
 });
 
     //new employee
