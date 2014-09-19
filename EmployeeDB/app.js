@@ -33,8 +33,8 @@ app.configure('development', function(){
 var employeeProvider= new EmployeeProvider('localhost', 27017);
 
 var dynamodb = new AWS.DynamoDB({region: 'us-west-2',
-                                 accessKeyId: 'AKIAIV7K7XZVVE2O4HSA',
-                                 secretAccessKey: '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'});
+    accessKeyId: '',
+    secretAccessKey: ''});
 
 //Routes
 
